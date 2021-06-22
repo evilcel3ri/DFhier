@@ -16,6 +16,11 @@ WINEVTX parse:
 log2timeline.py --parsers="winevtx" --status_view output.dump image.E01
 psort.py --output_time_zone 'UTC' -o l2tcsv -w output.csv output.dump
 ```
+Psteal quick through EVTX:
+
+```
+psteal.py --source source.evtx -o l2tcsv -w out.csv
+```
 
 ## Volatility
 
@@ -41,6 +46,18 @@ Print content of a key:
 
 `vol3 -f target.mem windows.registry.printkey.PrintKey --key "KEY" | tee key.out`
 
+## Tools
+
+* [SIFT Workstation](https://www.sans.org/tools/sift-workstation/)
+* [Remnux](https://remnux.org/)
+* [Blackarch](https://blackarch.org/)
+* [Ripgrep](https://github.com/BurntSushi/ripgrep)
+* [Ripgrep all](https://github.com/phiresky/ripgrep-all)
+* [FD (find in rust)](https://github.com/sharkdp/fd)
+
+## Cheatsheets
+
+* [Oledump cheatsheet](https://www.sans.org/security-resources/posters/oledumppy-quick-reference/325/download)
 
 ## Misc
 
