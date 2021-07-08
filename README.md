@@ -4,26 +4,37 @@
 
 Notes on DFIR tools.
 
-## Plaso
-
-List parsers:
-
-`log2timeline.py --parsers list`
-
-WINEVTX parse:
+## EnCase
 
 ```
-log2timeline.py --parsers="winevtx" --status_view output.dump image.E01
-psort.py --output_time_zone 'UTC' -o l2tcsv -w output.csv output.dump
-```
-Psteal quick through EVTX:
-
-```
-psteal.py --source source.evtx -o l2tcsv -w out.csv
+ewfmount FILE.EO1 /mount # mount image
+mmls /mount #find offset OR fdisk -l ewf/ewf1 
+sudo mount -o ro,loop,show_sys_files,stream_interface=windows,offset=$OFFSET_FROM_MMLS*sector_size /mount /mnt
 ```
 
-## Volatility
+## Memory
 
+### Vol2
+
+Basic plugins:
+* pstree (and -v to see the full filepath)
+* netscan
+* dumpregistry
+* hashdump
+* evtlogs
+* malfind + maldump + clamscan
+
+Ouput plugin data in a greppable format:
+
+```sh
+vol.py -f FILE.mem --profile=XYZ netscan --output-file=grep_netscan.txt --output=greptext
+```
+
+### Vol3
+
+```
+vol3 -f FILE PLUGIN
+```
 Get the process tree:
 
 `vol3 -f target.mem windows.pstree.PsTree`
@@ -45,6 +56,25 @@ vol3 -f target.mem windows.malfind.MalFind --dump
 Print content of a key:
 
 `vol3 -f target.mem windows.registry.printkey.PrintKey --key "KEY" | tee key.out`
+
+
+## Plaso
+
+List parsers:
+
+`log2timeline.py --parsers list`
+
+WINEVTX parse:
+
+```
+log2timeline.py --parsers="winevtx" --status_view output.dump image.E01
+psort.py --output_time_zone 'UTC' -o l2tcsv -w output.csv output.dump
+```
+Psteal quick through EVTX:
+
+```
+psteal.py --source source.evtx -o l2tcsv -w out.csv
+```
 
 ## Tools
 
