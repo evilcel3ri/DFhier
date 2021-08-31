@@ -16,18 +16,44 @@ sudo mount -o ro,loop,show_sys_files,stream_interface=windows,offset=$OFFSET_FRO
 
 ### Vol2
 
-Basic plugins:
+Detect the version:
+
+```
+vol.py imageinfo -f memdump.mem
+```
+
+Basic plugins (vaguely in the order of an investigation):
 * pstree (and -v to see the full filepath)
+* pslist
+* filescan
+* hivelist
 * netscan
 * dumpregistry
 * hashdump
 * evtlogs
+* malprocfind
 * malfind + maldump + clamscan
+* processbl
+* dlllist
+* getsids
+* handles
+* mutantscan
+* hollowfind
+* ldrmodules
+* threadmap
+
+You can provide a baseline image with -B and use it to compare (it will combine processbl, servicebl and driverbl).
 
 Ouput plugin data in a greppable format:
 
 ```sh
 vol.py -f FILE.mem --profile=XYZ netscan --output-file=grep_netscan.txt --output=greptext
+```
+
+Get the memory dump from the hibernating file:
+
+```
+vol.py -f hibernating.sys --profile=PROFILE imagecopy -O hibertnating2raw.raw
 ```
 
 ### Vol3
