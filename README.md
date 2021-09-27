@@ -115,6 +115,13 @@ WINEVTX parse:
 log2timeline.py --parsers="winevtx" --status_view output.dump image.E01
 psort.py --output_time_zone 'UTC' -o l2tcsv -w output.csv output.dump
 ```
+
+Time filtering:
+
+```
+psort.py -z "UTC" -o l2tcsv file.dump "date > 'YYYY-MM-DD HH:MM:SS' AND date < 'YYYY-MM-DD HH:MM:SS'" -w file-plaso.csv 
+```
+
 Psteal quick through EVTX:
 
 ```
