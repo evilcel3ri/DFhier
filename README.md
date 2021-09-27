@@ -12,6 +12,25 @@ mmls /mount #find offset OR fdisk -l ewf/ewf1
 sudo mount -o ro,loop,show_sys_files,stream_interface=windows,offset=$OFFSET_FROM_MMLS*sector_size /mount /mnt
 ```
 
+### Shadow Copies
+
+```
+vshadowinfo /mnt/ewf_mount/ewf1
+vshadowmount /mnt/ewf_mount/ewf1 /vss
+for i in vss*; do mount -o ro,loop,show_sys_files,streams_interfaces=windows $i /mnt/shadow_mount/$i;done
+```
+
+Timeline creation:
+
+```
+fls -r -m C: FILE.E01 > FILE-vss.body
+for i in vss*; do fls -r -m C: $i >> FILE-vss.body;done
+sort FILE-vss.body | uniq > dedup-FILE-vss.body
+mactime -z UTC -y -d -b dedup-FILE-vss.body yyyy-mm-dd..yyyy-mm-dd > file.csv
+# filter out the noise
+grep -v -i -f noise_filter.txt file.csv > final.csv
+```
+
 ## Memory
 
 ### Vol2
