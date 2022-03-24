@@ -143,6 +143,7 @@ psteal.py --source source.evtx -o l2tcsv -w out.csv
 * [Ripgrep](https://github.com/BurntSushi/ripgrep)
 * [Ripgrep all](https://github.com/phiresky/ripgrep-all)
 * [FD (find in rust)](https://github.com/sharkdp/fd)
+* [EVTX](https://github.com/omerbenamram/EVTX)
 
 ## Cheatsheets
 
