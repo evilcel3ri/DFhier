@@ -4,6 +4,13 @@
 
 Notes on DFIR tools.
 
+## Startup
+
+```
+docker run --rm -it -u remnux remnux/remnux-distro:focal bash
+docker run --rm -it -u remnux -v $PWD:/home/remnux/files remnux/remnux-distro bash
+```
+
 ## EnCase
 
 ```
